@@ -1,6 +1,9 @@
 name: deploy_workflow
-on: [push, workflow_dispatch]
-
+on: 
+    pull_request:
+        types:
+            - opened
+    workflow_dispatch:
 jobs:
     test:
 
