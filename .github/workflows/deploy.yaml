@@ -44,5 +44,5 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - name: work_on_githubaction_context
-              run: echo "${{ github }}"
+              run: echo "${{ toJson(github) }}"
             
