@@ -44,9 +44,9 @@ jobs:
             - name: build_project
               run: npm run build
 
-    # output_context:
-    #     runs-on: ubuntu-latest
-    #     steps:
-    #         - name: work_on_githubaction_context
-    #           run: echo "${{ toJson(github) }}"
+    output_context:
+        runs-on: ubuntu-latest
+        steps:
+            - name: work_on_githubaction_context
+              run: echo "${{ toJson(github) }}"
             
