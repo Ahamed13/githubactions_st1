@@ -104,6 +104,8 @@ jobs:
               whoami
               ls -l | grep download-dist
               ls -l download-dist/
+              cd download-dist/
+              ls -l
 
     output_context:
         runs-on: ubuntu-latest
