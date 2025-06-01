@@ -43,11 +43,11 @@ jobs:
         - name: build_website
           run: npm run build
 
-        - name: upload_artifacts
-          uses: actions/upload-artifact@v4
-          with:
-            name: dist-folder
-            path: dist
+        # - name: upload_artifacts
+        #   uses: actions/upload-artifact@v4
+        #   with:
+        #     name: dist-folder
+        #     path: dist
 
         - name: upload_to_azure_storage_account
           env:
@@ -106,6 +106,7 @@ jobs:
               ls -l download-dist/
               cd download-dist/
               pwd 
+              ls -l 
 
     output_context:
         runs-on: ubuntu-latest
