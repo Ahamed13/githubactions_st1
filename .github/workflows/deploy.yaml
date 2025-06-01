@@ -49,6 +49,25 @@ jobs:
             name: dist-folder
             path: dist
 
+        - name: upload_to_azure_storage_account
+          env:
+            AZURE_STORAGE_ACCOUNT: ${{ secrets.AZURE_STORAGE_ACCOUNT }}
+            AZURE_STORAGE_SAS_TOKEN: ${{ secrets.AZURE_STORAGE_SAS_TOKEN }}
+            AZURE_CONTAINER_NAME: ${{ secrets.AZURE_CONTAINER_NAME }}          
+          uses: azure/cli@v2
+          with:
+            azcliversion: latest
+
+            inlineScript: |
+              az storage blob upload-batch \
+              --account-name "$AZURE_STORAGE_ACCOUNT" \
+              --sas-token "$AZURE_STORAGE_SAS_TOKEN" \
+              --destination "$AZURE_CONTAINER_NAME" \
+              --source ./dist \
+              --destination-path dist-folder
+            
+      
+
     deployment:
 
         needs: build
