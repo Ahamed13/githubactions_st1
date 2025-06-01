@@ -105,7 +105,7 @@ jobs:
               ls -l | grep download-dist
               ls -l download-dist/
               cd download-dist/
-              ls -l
+              pwd 
 
     output_context:
         runs-on: ubuntu-latest
