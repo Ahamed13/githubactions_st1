@@ -74,15 +74,36 @@ jobs:
         runs-on: ubuntu-latest
         steps:
 
-          - name: download_artifacts
-            uses: actions/download-artifact@v4
+          # - name: download_artifacts
+          #   uses: actions/download-artifact@v4
+          #   with:
+          #     name: dist-folder
+          
+          - name: download_artifact_from_azure_storage
+            uses: azure/cli@v2
+            env:
+              AZURE_STORAGE_ACCOUNT: ${{ secrets.AZURE_STORAGE_ACCOUNT }}
+              AZURE_STORAGE_SAS_TOKEN: ${{ secrets.AZURE_STORAGE_SAS_TOKEN }}
+              AZURE_CONTAINER_NAME: ${{ secrets.AZURE_CONTAINER_NAME }}
             with:
-              name: dist-folder
+              azcliversion: latest
+              inlineScript: |
+                mkdir -p download-dist
+                az storage blob download-batch \
+                --account-name "$AZURE_STORAGE_ACCOUNT" \
+                --sas-token "$AZURE_STORAGE_SAS_TOKEN" \
+                --destination ./download-dist \
+                --source "$AZURE_CONTAINER_NAME" \
+                --pattern "dist-folder/*"
+
+
+
           - name: Test_folders
             run: |
               pwd
               whoami
-              ls -l
+              ls -l | grep download-dist
+              ls -l download-dist/
 
     output_context:
         runs-on: ubuntu-latest
