@@ -46,8 +46,8 @@ jobs:
         - name: upload_artifacts
           uses: actions/upload-artifact@v3
           with:
-            name: dist-file
-            path: dist/
+            name: src-file
+            path: src/
 
     deployment:
 
