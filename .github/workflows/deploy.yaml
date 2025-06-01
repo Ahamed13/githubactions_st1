@@ -107,6 +107,8 @@ jobs:
               cd download-dist/
               pwd 
               ls -l 
+              cd dist-folder
+              ls -l
 
     output_context:
         runs-on: ubuntu-latest
