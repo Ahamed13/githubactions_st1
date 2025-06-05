@@ -1,0 +1,31 @@
+name: job_output
+on:
+    push:
+        branches:
+            - main
+
+jobs:
+    env-setup:
+        runs-on: ubuntu-latest
+        outputs:
+            env_target: ${{ steps.setting_output.outputs.env_target }}
+
+        steps:
+
+            - name: setting_env_name
+              id : setting_output
+              run: |
+                if [[ "${{ github.ref}}" == 'refs/head/main' ]];
+                    then
+                        echo "env_target=prod" >> $GITHUB_OUTPUT
+                    else:
+                        echo "env_target=dev" >> $GITHUB_OUTPUT
+                fi
+
+    deploy:
+        needs:  env-setup
+        runs-on: ubuntu-latest
+        steps:
+            
+            - name: featching_env_for_deployment
+              run: echo "deploy env ${{ needs.env-setup.outputs.env_target }}"
