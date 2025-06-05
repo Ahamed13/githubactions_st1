@@ -2,7 +2,7 @@ name: job_output
 on:
     push:
         branches:
-            - main
+            - dev
 
 jobs:
     env-setup:
