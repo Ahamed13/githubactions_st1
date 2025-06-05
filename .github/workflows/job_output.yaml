@@ -15,7 +15,7 @@ jobs:
             - name: setting_env_name
               id : setting_output
               run: |
-                if [[ "${{ github.ref}}" == 'refs/head/dev' ]];
+                if [[ "${{ github.ref}}" == 'refs/heads/dev' ]];
                     then
                         echo "env_target=dev" >> $GITHUB_OUTPUT
                     else:
